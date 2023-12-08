@@ -1,0 +1,24 @@
+apiVersion: apps/v1 # Specifies the API version for this Kubernetes resource.
+kind: Deployment # Indicates that this is a Deployment resource.
+
+metadata:
+  name: my-node-app-deployment # The name of the Deployment resource.
+
+spec:
+  replicas: 3 # Specifies that there should be 3 replicas of the application.
+  selector:
+    matchLabels:
+      app: my-node-app # Selects Pods with the label "app: my-node-app."
+
+  template:
+    metadata:
+      labels:
+        app: my-node-app # Labels Pods created by this Deployment as "app: my-node-app."
+
+    spec:
+      containers:
+      - name: my-node-app-container # The name of the container within the Pod.
+        image: us.icr.io/<your-namespace>/my-node-app:1.0 # Specifies the Docker image to use.
+        ports:
+        - containerPort: 3000 # Indicates that the container listens on port 3000.
+
